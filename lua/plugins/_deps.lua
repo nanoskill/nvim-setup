@@ -80,4 +80,7 @@ require("lazy").setup({
 	-- comment
 	{ "numToStr/Comment.nvim" },
 
+	{ "f-person/git-blame.nvim" },
+
+	{ "sindrets/diffview.nvim", dependencies="nvim-lua/plenary.nvim" },
 })

@@ -22,7 +22,15 @@ vim.opt.mouse="a"
 --vim.opt.clipboard="unnamed"
 vim.opt.scrollbind=false
 vim.opt.wildmenu=true
+-- vim.opt.autochdir=true
+vim.opt.foldmethod="expr"
+vim.opt.foldexpr="nvim_treesitter#foldexpr()"
 
 vim.opt.termguicolors=true
 
+vim.api.nvim_create_autocmd({'BufReadPost','FileReadPost','BufWinEnter'}, {
+	pattern="*",
+	command="normal zR",
+})
 
+-- vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text, applied on lualine
