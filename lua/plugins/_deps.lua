@@ -15,6 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- appearance
 	{ "catppuccin/nvim", name = "catppuccin" },
+	{ "Mofiqul/vscode.nvim" },
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
