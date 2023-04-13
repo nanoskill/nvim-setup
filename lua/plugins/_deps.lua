@@ -58,6 +58,10 @@ require("lazy").setup({
 	{ "rafamadriz/friendly-snippets" }, -- useful snippets
 	{ "onsails/lspkind.nvim"},
 
+	-- ts snippets
+	{ "yuki-yano/tsnip.nvim", dependencies="vim-denops/denops.vim" },
+	{ "KentoOgata/cmp-tsnip" },
+
 	-- LSP management
 	{ "williamboman/mason.nvim", build=":MasonUpdate" },
 	{ "williamboman/mason-lspconfig.nvim" },
@@ -73,6 +77,7 @@ require("lazy").setup({
 		},
 	},
 	{ "jose-elias-alvarez/typescript.nvim" },
+	{ "jose-elias-alvarez/null-ls.nvim"},
 
 	-- terminal 
 	{ "akinsho/toggleterm.nvim" },
