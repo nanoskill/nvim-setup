@@ -89,4 +89,8 @@ require("lazy").setup({
 	{ "f-person/git-blame.nvim" },
 
 	{ "sindrets/diffview.nvim", dependencies="nvim-lua/plenary.nvim" },
+
+	-- auto session
+	{ "rmagatti/auto-session" },
+
 })

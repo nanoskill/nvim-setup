@@ -17,6 +17,7 @@ require("plugins.lsp.saga")
 require("plugins.toggleterm")
 require("plugins.comment")
 require("plugins.blame")
+require("plugins.autosession")
 
 require("plugins._keymap")
 
