@@ -3,6 +3,21 @@ require("mason-lspconfig").setup {
 	ensure_installed = { "gopls", "golangci_lint_ls", "lua_ls", "tsserver", "cssls", "tailwindcss", "html" },
 }
 
+local null_ls = require("null-ls")
+local mason_null_ls = require("mason-null-ls");
+null_ls.setup({
+	sources = {
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.diagnostics.eslint,
+		null_ls.builtins.completion.spell,
+		require("typescript.extensions.null-ls.code-actions"),
+	}
+})
+
+mason_null_ls.setup({
+	automatic_setup = true,
+})
+
 
 local lspconfig = require("lspconfig")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
