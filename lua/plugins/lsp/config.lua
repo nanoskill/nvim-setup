@@ -28,6 +28,7 @@ local keymap = vim.keymap
 
 -- enable keybinds only for when lsp server available
 local on_attach = function(client, bufnr)
+	local builtin = require("telescope.builtin")
   -- keybind options
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -35,7 +36,9 @@ local on_attach = function(client, bufnr)
   keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
   keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
   keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts) -- see definition and make edits in window
-  keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- go to implementation
+  keymap.set("n", "gi", builtin.lsp_implementations, opts) -- see definition and make edits in window
+  keymap.set("n", "gr", builtin.lsp_references, opts) -- see definition and make edits in window
+  -- keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- go to implementation
   keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
   keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
   keymap.set("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
