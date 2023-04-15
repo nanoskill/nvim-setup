@@ -82,7 +82,8 @@ require("lazy").setup({
 	{ "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
 	},
-
+	{ "hrsh7th/cmp-nvim-lsp-document-symbol" },
+ 
 	-- terminal 
 	{ "akinsho/toggleterm.nvim" },
 
