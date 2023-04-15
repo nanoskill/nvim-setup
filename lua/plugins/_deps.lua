@@ -97,4 +97,5 @@ require("lazy").setup({
 	-- auto session
 	{ "rmagatti/auto-session" },
 
+	{ "FotiadisM/tabset.nvim" },
 })
