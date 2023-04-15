@@ -27,37 +27,14 @@ cmp.setup({
     ["<C-Space>"] = cmp.mapping.complete(), -- not working for windows
     ["<C-x>"] = cmp.mapping.complete(), -- show completion suggestions
     ["<C-e>"] = cmp.mapping.abort(), -- close completion window
-		["<S-Tab>"] = cmp.mapping({
-			c = function (fallback)
-				if cmp.visible() then
-					cmp.select_prev_item()
-				else
-					fallback()
-				end
-			end,
-			i = function (fallback)
+		["<S-Tab>"] = cmp.mapping(function (fallback)
 				if luasnip.jumpable(-1) then
 					luasnip.jump(-1)
 				else
 					fallback()
 				end
-			end,
-			s = function (fallback)
-				if luasnip.jumpable(-1) then
-					luasnip.jump(-1)
-				else
-					fallback()
-				end
-			end,
-		}),
+			end, {"i","s"}),
 		["<Tab>"] = cmp.mapping({
-			c = function (fallback)
-				if cmp.visible() then
-					cmp.select_next_item()
-				else
-					fallback()
-				end
-			end,
 			i = function (fallback)
 				if cmp.visible() then
 					cmp.confirm({select = true})
@@ -97,6 +74,7 @@ cmp.setup({
 })
 
 cmp.setup.cmdline('/', {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp_document_symbol' },
 	}, {
