@@ -2,8 +2,8 @@ require("plugins._deps")
 
 require("plugins._default")
 
--- require("plugins.theme.catppuccin")
-require("plugins.theme.vscode")
+require("plugins.theme.catppuccin")
+-- require("plugins.theme.vscode")
 require("plugins.barbar")
 require("plugins.lualine")
 require("plugins.nvim-tree")
