@@ -40,11 +40,15 @@ require("lazy").setup({
 		},
 	},
 
-
+	-- auto complete
 	{ "nvim-treesitter/nvim-treesitter" },
 
+	-- git
 	{ "lewis6991/gitsigns.nvim" },
+	{ "sindrets/diffview.nvim", dependencies="nvim-lua/plenary.nvim" },
+	{ "f-person/git-blame.nvim" },
 
+	-- autopair
 	{ "windwp/nvim-autopairs" },
 	{ "windwp/nvim-ts-autotag", dependencies = "nvim-treesitter/nvim-treesitter" },
 
@@ -83,19 +87,16 @@ require("lazy").setup({
     event = { "BufReadPre", "BufNewFile" },
 	},
 	{ "hrsh7th/cmp-nvim-lsp-document-symbol" },
- 
+
 	-- terminal 
 	{ "akinsho/toggleterm.nvim" },
 
 	-- comment
 	{ "numToStr/Comment.nvim" },
 
-	{ "f-person/git-blame.nvim" },
-
-	{ "sindrets/diffview.nvim", dependencies="nvim-lua/plenary.nvim" },
-
 	-- auto session
 	{ "rmagatti/auto-session" },
 
+	-- tab size management
 	{ "FotiadisM/tabset.nvim" },
 })
