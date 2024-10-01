@@ -46,7 +46,7 @@ map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 -- :BarbarDisable - very bad command, should never be used
 
 -- [[ nvim-tree ]]--
--- map('n', '<leader>to', '<Cmd>NvimTreeOpen<CR>', opts)
+map('n', '<leader>to', '<Cmd>NvimTreeFocus<CR>', opts)
 map('n', '<leader>e', '<Cmd>NvimTreeToggle<CR>', opts)
 
 -- [[ telescope ]]--

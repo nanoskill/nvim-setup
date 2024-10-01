@@ -33,4 +33,18 @@ vim.api.nvim_create_autocmd({'BufReadPost','FileReadPost','BufWinEnter'}, {
 	command="normal zR",
 })
 
+-- vim.opt.shell = 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'
+--[[ vim.o.shell = 'powershell.exe'
+vim.o.shellxquote = ''
+vim.o.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command '
+vim.o.shellquote = ''
+vim.o.shellpipe = '| Out-File -Encoding UTF8 %s'
+vim.o.shellredir = '| Out-File -Encoding UTF8 %s'
+ ]]
+
+ vim.opt.shell = "wsl.exe"
+vim.o.shellxquote = ''
+vim.o.shellcmdflag = ''
+vim.o.shellquote = ''
+
 -- vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text, applied on lualine

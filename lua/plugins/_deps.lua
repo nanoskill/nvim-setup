@@ -22,11 +22,22 @@ require("lazy").setup({
 		opts = true,
 	},
 
-	-- tabs
-	{
-		"romgrk/barbar.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
-	},
+  -- tabs
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+      -- animation = true,
+      -- insert_at_start = true,
+      -- …etc.
+    },
+    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  },
 
 	-- file explorer & navigation
 	{
@@ -40,9 +51,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- auto complete
-	{ "nvim-treesitter/nvim-treesitter" },
-
 	-- git
 	{ "lewis6991/gitsigns.nvim" },
 	{ "sindrets/diffview.nvim", dependencies="nvim-lua/plenary.nvim" },
@@ -53,6 +61,7 @@ require("lazy").setup({
 	{ "windwp/nvim-ts-autotag", dependencies = "nvim-treesitter/nvim-treesitter" },
 
 	-- Autocomplete
+	{ "nvim-treesitter/nvim-treesitter" },
 	{ "hrsh7th/nvim-cmp" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },
@@ -74,14 +83,19 @@ require("lazy").setup({
 	-- LSP server config
 	{ "neovim/nvim-lspconfig" },
 	{ "hrsh7th/cmp-nvim-lsp" },
-	{
-		"glepnir/lspsaga.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"nvim-treesitter/nvim-treesitter"
-		},
-	},
-	{ "jose-elias-alvarez/typescript.nvim" },
+  
+  {
+    "nvimdev/lspsaga.nvim",
+    config = function()
+        require('lspsaga').setup({})
+    end,
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter", -- optional
+        "nvim-tree/nvim-web-devicons",     -- optional
+    }
+  },
+
+  { "jose-elias-alvarez/typescript.nvim" },
 	{ "jose-elias-alvarez/null-ls.nvim"},
 	{ "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
