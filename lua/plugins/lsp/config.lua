@@ -83,7 +83,7 @@ vim.lsp.config("*", {
 local ts_ls_attach = (vim.lsp.config["ts_ls"] or {}).on_attach
 vim.lsp.config("ts_ls", {
   capabilities = capabilities,
-  on_attach = function(client, bufnr) 
+  on_attach = function(client, bufnr)
     ts_ls_attach(client, bufnr)
     on_attach(client, bufnr)
   end,
@@ -109,3 +109,14 @@ vim.lsp.config("lua_ls", {
     },
   },
 })
+
+-- Run gofmt on save
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+  group = format_sync_grp,
+}) 
