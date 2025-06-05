@@ -80,11 +80,20 @@ vim.lsp.config("*", {
   on_attach = on_attach,
 })
 
-local ts_ls_attach = (vim.lsp.config["ts_ls"] or {}).on_attach
+local ts_ls_attach = (vim.lsp.config["ts_ls"] or {}).on_attach or {}
 vim.lsp.config("ts_ls", {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     ts_ls_attach(client, bufnr)
+    on_attach(client, bufnr)
+  end,
+})
+
+local pyright_attach = (vim.lsp.config["pyright"] or {}).on_attach or {}
+vim.lsp.config("pyright", {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    pyright_attach(client, bufnr)
     on_attach(client, bufnr)
   end,
 })
