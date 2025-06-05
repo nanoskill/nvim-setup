@@ -59,6 +59,9 @@ vim.keymap.set('n', '<leader>fo', builtin.git_files, opts)
 	end, opts)]]--
 vim.keymap.set('n', '<leader>fa', builtin.live_grep, opts)
 vim.keymap.set('n', '<leader>fh', builtin.oldfiles, opts)
+vim.keymap.set('n', '<leader>fd', function ()
+  builtin.diagnostics({bufnr = 0})
+end, opts)
 
 -- [[ terminal ]]--
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], opts)

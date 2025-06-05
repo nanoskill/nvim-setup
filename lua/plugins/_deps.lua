@@ -52,9 +52,9 @@ require("lazy").setup({
 	},
 
 	-- git
-	{ "lewis6991/gitsigns.nvim" },
+	{ "lewis6991/gitsigns.nvim" }, -- fot gutter and reset hunk
 	{ "sindrets/diffview.nvim", dependencies="nvim-lua/plenary.nvim" },
-	{ "f-person/git-blame.nvim" },
+	{ "f-person/git-blame.nvim" }, -- for lualine
 
 	-- autopair
 	{ "windwp/nvim-autopairs" },
