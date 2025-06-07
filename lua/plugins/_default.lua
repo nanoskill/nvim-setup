@@ -23,15 +23,20 @@ vim.opt.mouse="a"
 vim.opt.scrollbind=false
 vim.opt.wildmenu=true
 -- vim.opt.autochdir=true
-vim.opt.foldmethod="expr"
-vim.opt.foldexpr="nvim_treesitter#foldexpr()"
-
+vim.o.foldlevelstart=99
+vim.o.foldmethod='expr'
+vim.o.foldexpr='v:lua.vim.treesitter.foldexpr()'
 vim.opt.termguicolors=true
--- vim.opt.signcolumn="yes"
+vim.opt.signcolumn="yes:1"
 
-vim.api.nvim_create_autocmd({'BufReadPost','FileReadPost','BufWinEnter'}, {
-	pattern="*",
-	command="normal zR",
-})
+-- vim.api.nvim_create_autocmd({'BufReadPost','FileReadPost','BufWinEnter'}, {
+-- 	pattern="*",
+-- 	command="normal zR",
+-- })
+
+-- vim.api.nvim_clear_autocmd({'BufReadPost','FileReadPost','BufWinEnter'}, {
+-- 	pattern="*",
+-- 	command="normal zR",
+-- })
 
 -- vim.g.gitblame_display_virtual_text = 0 -- Disable virtual text, applied on lualine
