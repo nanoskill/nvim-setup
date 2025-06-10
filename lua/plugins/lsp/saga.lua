@@ -5,5 +5,5 @@ saga.setup({
 	definition = { 
     keys = { edit = "<CR>" },
   },
-  lightbulb = { sign = false },
+  lightbulb = { virtual_text = false },
 })

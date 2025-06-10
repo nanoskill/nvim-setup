@@ -61,7 +61,7 @@ require("lazy").setup({
 	{ "windwp/nvim-ts-autotag", dependencies = "nvim-treesitter/nvim-treesitter" },
 
 	-- Autocomplete
-	{ 
+	{
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
     build = ":TSUpdate",
@@ -91,7 +91,7 @@ require("lazy").setup({
 	-- LSP server config
 	{ "neovim/nvim-lspconfig" },
 	{ "hrsh7th/cmp-nvim-lsp" },
-  
+
 	{
 		"nvimdev/lspsaga.nvim",
 		dependencies = {
