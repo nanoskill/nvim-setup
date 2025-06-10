@@ -24,8 +24,19 @@ require("lazy").setup({
 
 	-- tabs
 	{
-		"romgrk/barbar.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
+		'romgrk/barbar.nvim',
+		dependencies = {
+			'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+			'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+		},
+		init = function() vim.g.barbar_auto_setup = false end,
+		opts = {
+		-- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+		-- animation = true,
+		-- insert_at_start = true,
+		-- …etc.
+		},
+		version = '^1.0.0', -- optional: only update when a new 1.x version is released
 	},
 
 	-- file explorer & navigation
@@ -40,19 +51,21 @@ require("lazy").setup({
 		},
 	},
 
-	-- auto complete
-	{ "nvim-treesitter/nvim-treesitter" },
-
 	-- git
-	{ "lewis6991/gitsigns.nvim" },
+	{ "lewis6991/gitsigns.nvim" }, -- fot gutter and reset hunk
 	{ "sindrets/diffview.nvim", dependencies="nvim-lua/plenary.nvim" },
-	{ "f-person/git-blame.nvim" },
+	{ "f-person/git-blame.nvim" }, -- for lualine
 
 	-- autopair
 	{ "windwp/nvim-autopairs" },
 	{ "windwp/nvim-ts-autotag", dependencies = "nvim-treesitter/nvim-treesitter" },
 
 	-- Autocomplete
+	{
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+  },
 	{ "hrsh7th/nvim-cmp" },
 	{ "hrsh7th/cmp-buffer" },
 	{ "hrsh7th/cmp-path" },
@@ -68,23 +81,33 @@ require("lazy").setup({
 	{ "KentoOgata/cmp-tsnip" },
 
 	-- LSP management
-	{ "williamboman/mason.nvim", build=":MasonUpdate" },
-	{ "williamboman/mason-lspconfig.nvim" },
+	{ 'mason-org/mason.nvim', opts = {} },
+	{
+		'mason-org/mason-lspconfig.nvim',
+		dependencies = { 'neovim/nvim-lspconfig' },
+		opts = {}
+	},
 
 	-- LSP server config
 	{ "neovim/nvim-lspconfig" },
 	{ "hrsh7th/cmp-nvim-lsp" },
+
 	{
-		"glepnir/lspsaga.nvim",
+		"nvimdev/lspsaga.nvim",
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"nvim-treesitter/nvim-treesitter"
+			"nvim-treesitter/nvim-treesitter", -- optional
+			"nvim-tree/nvim-web-devicons",     -- optional
+		}
+	},
+
+	{
+		"nvimtools/none-ls.nvim",
+		dependencies = {
+		  "nvimtools/none-ls-extras.nvim",
 		},
 	},
-	{ "jose-elias-alvarez/typescript.nvim" },
-	{ "jose-elias-alvarez/null-ls.nvim"},
 	{ "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    	event = { "BufReadPre", "BufNewFile" },
 	},
 	{ "hrsh7th/cmp-nvim-lsp-document-symbol" },
 
