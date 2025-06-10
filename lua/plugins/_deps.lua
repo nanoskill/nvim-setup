@@ -1,26 +1,12 @@
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
+return {
 	-- appearance
-	{ "catppuccin/nvim", name = "catppuccin" },
-	{ "Mofiqul/vscode.nvim" },
-	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		opts = true,
-	},
+	-- { "catppuccin/nvim", name = "catppuccin" },
+	-- { "Mofiqul/vscode.nvim" },
+	-- {
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	dependencies = "nvim-tree/nvim-web-devicons",
+	-- 	opts = true,
+	-- },
 
 	-- tabs
 	{
@@ -119,7 +105,4 @@ require("lazy").setup({
 
 	-- auto session
 	{ "rmagatti/auto-session" },
-
-	-- tab size management
-	{ "FotiadisM/tabset.nvim" },
-})
+}
