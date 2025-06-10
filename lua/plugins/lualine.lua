@@ -8,7 +8,7 @@ return {
 		opts = true,
     config = function ()
       local git_blame = require('gitblame')
-      return {
+      require("lualine").setup({
         sections={
           lualine_c = {},
           lualine_x = {
@@ -26,7 +26,7 @@ return {
           },
         },
         extensions = { 'lazy', 'mason', 'toggleterm', 'nvim-tree' },
-      }
+      })
     end
 	},
 }
