@@ -5,7 +5,6 @@ return {
       "f-person/git-blame.nvim",
       "nvim-tree/nvim-web-devicons",
     },
-		opts = true,
     config = function ()
       local git_blame = require('gitblame')
       require("lualine").setup({
@@ -25,7 +24,7 @@ return {
             'lsp_status',
           },
         },
-        extensions = { 'lazy', 'mason', 'toggleterm', 'nvim-tree' },
+        extensions = { 'lazy', 'mason', 'toggleterm', 'neo-tree', --[[ 'nvim-tree' ]] },
       })
     end
 	},

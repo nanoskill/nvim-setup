@@ -1,6 +1,6 @@
 return {
 	"FotiadisM/tabset.nvim",
-  config = {
+  opts = {
     defaults = {
       tabwidth = 2,
       expandtab = true,
