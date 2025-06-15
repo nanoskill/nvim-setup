@@ -17,13 +17,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-opt")
 require("lazy").setup("plugins")
-
-require("plugins.temp.nvim-treesitter")
 require("plugins.temp.nvim-cmp")
-require("plugins.lsp.config")
-require("plugins.lsp.saga")
--- require("plugins.temp.toggleterm")
--- require("plugins.temp.git-blame")
--- require("plugins.temp.autosession")
+require("plugins.temp.nvim-treesitter")
 
+require("lsp-config")
 require("keymap")
