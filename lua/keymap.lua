@@ -47,7 +47,9 @@ map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 
 -- [[ nvim-tree ]]--
 -- map('n', '<leader>to', '<Cmd>NvimTreeOpen<CR>', opts)
-map('n', '<leader>e', '<Cmd>NvimTreeToggle<CR>', opts)
+-- map('n', '<leader>e', '<Cmd>NvimTreeToggle<CR>', opts)
+
+map('n', '<leader>e', '<Cmd>Neotree reveal<CR>', opts)
 
 -- [[ telescope ]]--
 local builtin = require("telescope.builtin")

@@ -12,11 +12,16 @@ local function on_attach(bufnr)
 	end, opts('Up'));
 end
 
-require("nvim-tree").setup({
-	respect_buf_cwd = true,
-	sync_root_with_cwd = true,
-	on_attach = on_attach,
-	filters = {
-		custom = { "^.git$" }
-	},
-})
+
+return {
+  "nvim-tree/nvim-tree.lua",
+  dependencies = "nvim-tree/nvim-web-devicons",
+  opts = {
+    respect_buf_cwd = true,
+    sync_root_with_cwd = true,
+    on_attach = on_attach,
+    filters = {
+      custom = { "^.git$" }
+    },
+  }
+}

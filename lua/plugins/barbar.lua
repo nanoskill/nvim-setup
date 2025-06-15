@@ -1,8 +1,11 @@
-local setup, bufferline = pcall(require, "bufferline")
-if not setup then return end
-
-
-bufferline.setup({
+return {
+  'romgrk/barbar.nvim',
+  dependencies = {
+    'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+    'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+  },
+  init = function() vim.g.barbar_auto_setup = false end,
+  opts = {
   clickable = true, -- Enables/disable clickable tabs
   tabpages = true, -- Enable/disable current/total tabpages indicator (top right corner)
   icons =  {
@@ -13,15 +16,7 @@ bufferline.setup({
 	}, -- Enable/disable icons
 	-- Set the filetypes which barbar will offset itself for
   sidebar_filetypes = {
-    -- Use the default values: {event = 'BufWinLeave', text = nil}
-    NvimTree = true,
-    -- Or, specify the text used for the offset:
-    undotree = {text = 'undotree'},
-    -- Or, specify the event which the sidebar executes when leaving:
-    ['neo-tree'] = {event = 'BufWipeout'},
-    -- Or, specify both
-    Outline = {event = 'BufWinLeave', text = 'symbols-outline'},
-  },
-
-})
-
+    ['neo-tree'] = true,
+  }},
+  version = '^1.0.0', -- optional: only update when a new 1.x version is released
+}
