@@ -25,9 +25,11 @@ vim.opt.wildmenu=true
 -- vim.opt.autochdir=true
 vim.o.foldlevelstart=99
 vim.o.foldmethod='expr'
-vim.o.foldexpr='v:lua.vim.treesitter.foldexpr()'
+vim.wo.foldexpr='v:lua.vim.treesitter.foldexpr()'
+vim.bo.indentexpr="v:lua.require'nvim-treesitter'.indentexpr()"
 vim.opt.termguicolors=true
 vim.opt.signcolumn="yes:1"
+
 
 -- vim.api.nvim_create_autocmd({'BufReadPost','FileReadPost','BufWinEnter'}, {
 -- 	pattern="*",

@@ -1,7 +1,3 @@
--- require("mason-lspconfig").setup({
--- 	ensure_installed = { "lua_ls", "ts_ls", "cssls", "tailwindcss", "html", "gopls" },
--- })
-
 require("lspsaga").setup({
 	scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>"},
 	definition = {
@@ -89,7 +85,6 @@ end
 --   },
 -- })
 
--- configure css server
 vim.lsp.config("*", {
   capabilities = capabilities,
   on_attach = on_attach,

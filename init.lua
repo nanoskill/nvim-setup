@@ -17,8 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("vim-opt")
 require("lazy").setup("plugins")
-require("plugins.temp.nvim-cmp")
-require("plugins.temp.nvim-treesitter")
 
+require("cmp-config")
 require("lsp-config")
 require("keymap")

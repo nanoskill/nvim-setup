@@ -1,10 +1,6 @@
 return {
 	-- LSP management
 	{ 'mason-org/mason.nvim', opts = {} },
-  {
-		'mason-org/mason-lspconfig.nvim',
-		dependencies = { 'neovim/nvim-lspconfig' },
-	},
 
 	-- LSP server config
 	{ "neovim/nvim-lspconfig" },
@@ -28,4 +24,15 @@ return {
     	event = { "BufReadPre", "BufNewFile" },
 	},
 	{ "hrsh7th/cmp-nvim-lsp-document-symbol" },
+
+  {
+		'mason-org/mason-lspconfig.nvim',
+    opts = {
+      -- ensure_installed = { "lua_ls", "ts_ls", "cssls", "tailwindcss", "html", "gopls" },
+    },
+		dependencies = { 
+      { 'mason-org/mason.nvim', opts = {} },
+      'neovim/nvim-lspconfig'
+    },
+	},
 }
