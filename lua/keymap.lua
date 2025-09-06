@@ -1,6 +1,18 @@
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+local function appendDescToOpts(desc)
+  local localOpts = {}
+
+  for k, v in pairs(opts) do
+    localOpts[k] = v
+  end
+
+  localOpts['desc'] = desc
+
+  return localOpts
+end
+
 map('i', 'jk', '<Esc>', opts)
 
 -- [[ barbar ]] --
@@ -24,8 +36,9 @@ map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
 -- Pin/unpin buffer
 map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
 -- Close buffer
-map('n', '<leader>tw', '<Cmd>BufferClose<CR>', opts)
-map('n', '<leader>tr', '<Cmd>BufferRestore<CR>', opts)
+map('n', '<leader>bc', '<Cmd>BufferClose<CR>', opts)
+map('n', '<leader>bC', '<Cmd>BufferCloseAllButCurrentOrPinned<CR>', opts)
+map('n', '<leader>br', '<Cmd>BufferRestore<CR>', opts)
 -- Wipeout buffer
 --                 :BufferWipeout
 -- Close commands
@@ -49,21 +62,21 @@ map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
 -- map('n', '<leader>to', '<Cmd>NvimTreeOpen<CR>', opts)
 -- map('n', '<leader>e', '<Cmd>NvimTreeToggle<CR>', opts)
 
-map('n', '<leader>e', '<Cmd>Neotree reveal<CR>', opts)
+map('n', '<leader>e', '<Cmd>Neotree toggle<CR>', opts)
 
 -- [[ telescope ]]--
 local builtin = require("telescope.builtin")
 
-vim.keymap.set('n', '<leader>ff', builtin.find_files, opts)
-vim.keymap.set('n', '<leader>fo', builtin.git_files, opts)
+vim.keymap.set('n', '<leader>ff', builtin.find_files, appendDescToOpts("Open Files"))
+vim.keymap.set('n', '<leader>fo', builtin.git_files, appendDescToOpts("Open Tracked Files"))
 --[[vim.keymap.set('n', '<leader>fa', function() 
 		builtin.grep_string({ search = vim.fn.input("Grep > ") });
 	end, opts)]]--
-vim.keymap.set('n', '<leader>fa', builtin.live_grep, opts)
-vim.keymap.set('n', '<leader>fh', builtin.oldfiles, opts)
+vim.keymap.set('n', '<leader>fa', builtin.live_grep, appendDescToOpts("Find All"))
+vim.keymap.set('n', '<leader>fh', builtin.oldfiles, appendDescToOpts("Open Recent Files"))
 vim.keymap.set('n', '<leader>fd', function ()
   builtin.diagnostics({bufnr = 0})
-end, opts)
+end, appendDescToOpts("Open Diagnostic on File"))
 
 -- [[ terminal ]]--
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], opts)
