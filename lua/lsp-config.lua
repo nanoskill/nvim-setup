@@ -34,6 +34,17 @@ local on_attach = function(client, bufnr)
 	local builtin = require("telescope.builtin")
   -- keybind options
   local opts = { noremap = true, silent = true, buffer = bufnr }
+  local function appendDescToOpts(desc)
+    local localOpts = {}
+
+    for k, v in pairs(opts) do
+      localOpts[k] = v
+    end
+
+    localOpts['desc'] = desc
+
+    return localOpts
+  end
 
   -- set keybinds
   keymap.set("n", "gf", "<cmd>Lspsaga finder<CR>", opts) -- show definition, references
@@ -55,6 +66,7 @@ local on_attach = function(client, bufnr)
   keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
   keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
   -- keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
+  keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, appendDescToOpts("Find Symbols"))
 
   -- typescript specific keymaps (e.g. rename file and update imports)
   -- if client.name == "ts_ls" then
