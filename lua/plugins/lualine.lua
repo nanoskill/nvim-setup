@@ -8,6 +8,12 @@ return {
     config = function ()
       local git_blame = require('gitblame')
       require("lualine").setup({
+        -- The filename is already in the barbar tabline, so it is dropped from
+        -- both the focused statusline and the inactive-window one (which
+        -- defaults to `lualine_c = { 'filename' }`).
+        inactive_sections = {
+          lualine_c = {},
+        },
         sections={
           lualine_c = {},
           lualine_x = {

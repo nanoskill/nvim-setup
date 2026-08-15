@@ -5,7 +5,13 @@ return {
     preset = "helix",
     delay = function (ctx)
       return ctx.plugin and 0 or 350
-    end
+    end,
+    spec = {
+      { "<leader>b", group = "buffer" },
+      { "<leader>c", group = "code" },
+      { "<leader>f", group = "find" },
+      { "<leader>r", group = "refactor" },
+    },
   },
   keys = {
     {

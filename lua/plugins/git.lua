@@ -1,5 +1,5 @@
 return {
-	{ "lewis6991/gitsigns.nvim" }, -- fot gutter and reset hunk
+	{ "lewis6991/gitsigns.nvim", opts = {} }, -- fot gutter and reset hunk
 	{ "sindrets/diffview.nvim", dependencies="nvim-lua/plenary.nvim" },
 	{
     "f-person/git-blame.nvim",

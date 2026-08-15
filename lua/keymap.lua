@@ -1,44 +1,37 @@
-local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-
-local function appendDescToOpts(desc)
-  local localOpts = {}
-
-  for k, v in pairs(opts) do
-    localOpts[k] = v
-  end
-
-  localOpts['desc'] = desc
-
-  return localOpts
+-- Every mapping goes through this wrapper: silent by default, and `desc` is what
+-- which-key displays, so it is required rather than optional.
+local function map(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
 end
 
-map('i', 'jk', '<Esc>', opts)
+-- Deferred so that merely defining a keymap does not load telescope at startup.
+local function pick(picker, args)
+  return function()
+    require("telescope.builtin")[picker](args)
+  end
+end
+
+map('i', 'jk', '<Esc>', 'Escape insert mode')
 
 -- [[ barbar ]] --
 -- Move to previous/next
-map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
-map('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+map('n', '<A-,>', '<Cmd>BufferPrevious<CR>', 'Previous buffer')
+map('n', '<A-.>', '<Cmd>BufferNext<CR>', 'Next buffer')
 -- Re-order to previous/next
-map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
-map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+map('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', 'Move buffer left')
+map('n', '<A->>', '<Cmd>BufferMoveNext<CR>', 'Move buffer right')
 -- Goto buffer in position...
-map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
-map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
-map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
-map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
-map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
-map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
-map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
-map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
-map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
-map('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+for i = 1, 9 do
+  map('n', ('<A-%d>'):format(i), ('<Cmd>BufferGoto %d<CR>'):format(i), ('Go to buffer %d'):format(i))
+end
+map('n', '<A-0>', '<Cmd>BufferLast<CR>', 'Go to last buffer')
 -- Pin/unpin buffer
-map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+map('n', '<A-p>', '<Cmd>BufferPin<CR>', 'Pin buffer')
+map('n', '<C-p>', '<Cmd>BufferPick<CR>', 'Pick buffer')
 -- Close buffer
-map('n', '<leader>bc', '<Cmd>BufferClose<CR>', opts)
-map('n', '<leader>bC', '<Cmd>BufferCloseAllButCurrentOrPinned<CR>', opts)
-map('n', '<leader>br', '<Cmd>BufferRestore<CR>', opts)
+map('n', '<leader>bc', '<Cmd>BufferClose<CR>', 'Close buffer')
+map('n', '<leader>bC', '<Cmd>BufferCloseAllButCurrentOrPinned<CR>', 'Close others')
+map('n', '<leader>br', '<Cmd>BufferRestore<CR>', 'Restore buffer')
 -- Wipeout buffer
 --                 :BufferWipeout
 -- Close commands
@@ -47,47 +40,37 @@ map('n', '<leader>br', '<Cmd>BufferRestore<CR>', opts)
 --                 :BufferCloseAllButCurrentOrPinned
 --                 :BufferCloseBuffersLeft
 --                 :BufferCloseBuffersRight
-map('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 -- Sort automatically by...
-map('n', '<Space>bb', '<Cmd>BufferOrderByBufferNumber<CR>', opts)
-map('n', '<Space>bd', '<Cmd>BufferOrderByDirectory<CR>', opts)
-map('n', '<Space>bl', '<Cmd>BufferOrderByLanguage<CR>', opts)
-map('n', '<Space>bw', '<Cmd>BufferOrderByWindowNumber<CR>', opts)
+map('n', '<leader>bb', '<Cmd>BufferOrderByBufferNumber<CR>', 'Order by number')
+map('n', '<leader>bd', '<Cmd>BufferOrderByDirectory<CR>', 'Order by directory')
+map('n', '<leader>bl', '<Cmd>BufferOrderByLanguage<CR>', 'Order by language')
+map('n', '<leader>bw', '<Cmd>BufferOrderByWindowNumber<CR>', 'Order by window')
 
 -- Other:
 -- :BarbarEnable - enables barbar (enabled by default)
 -- :BarbarDisable - very bad command, should never be used
 
--- [[ nvim-tree ]]--
--- map('n', '<leader>to', '<Cmd>NvimTreeOpen<CR>', opts)
--- map('n', '<leader>e', '<Cmd>NvimTreeToggle<CR>', opts)
-
-map('n', '<leader>e', '<Cmd>Neotree toggle<CR>', opts)
+-- [[ neo-tree ]]--
+map('n', '<leader>e', '<Cmd>Neotree toggle<CR>', 'Toggle file tree')
 
 -- [[ telescope ]]--
-local builtin = require("telescope.builtin")
-
-vim.keymap.set('n', '<leader>ff', builtin.find_files, appendDescToOpts("Open Files"))
-vim.keymap.set('n', '<leader>fo', builtin.git_files, appendDescToOpts("Open Tracked Files"))
---[[vim.keymap.set('n', '<leader>fa', function() 
-		builtin.grep_string({ search = vim.fn.input("Grep > ") });
-	end, opts)]]--
-vim.keymap.set('n', '<leader>fa', builtin.live_grep, appendDescToOpts("Find All"))
-vim.keymap.set('n', '<leader>fh', builtin.oldfiles, appendDescToOpts("Open Recent Files"))
-vim.keymap.set('n', '<leader>fd', function ()
-  builtin.diagnostics({bufnr = 0})
-end, appendDescToOpts("Open Diagnostic on File"))
+map('n', '<leader>ff', pick('find_files'), 'Open Files')
+map('n', '<leader>fo', pick('git_files'), 'Open Tracked Files')
+map('n', '<leader>fa', pick('live_grep'), 'Find All')
+map('n', '<leader>fh', pick('oldfiles'), 'Open Recent Files')
+map('n', '<leader>fd', pick('diagnostics', { bufnr = 0 }), 'Open Diagnostic on File')
 
 -- [[ terminal ]]--
-vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], opts)
-vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+map('t', '<Esc>', [[<C-\><C-n>]], 'Exit terminal mode')
+map('t', 'jk', [[<C-\><C-n>]], 'Exit terminal mode')
+map('t', '<C-h>', [[<Cmd>wincmd h<CR>]], 'Window left')
+map('t', '<C-j>', [[<Cmd>wincmd j<CR>]], 'Window down')
+map('t', '<C-k>', [[<Cmd>wincmd k<CR>]], 'Window up')
+map('t', '<C-l>', [[<Cmd>wincmd l<CR>]], 'Window right')
+map('t', '<C-w>', [[<C-\><C-n><C-w>]], 'Window command')
 
-map('n', '<A-Up>', '<C-w>k', opts)
-map('n', '<A-Down>', '<C-w>j', opts)
-map('n', '<A-Left>', '<C-w>h', opts)
-map('n', '<A-Right>', '<C-w>l', opts)
+-- [[ windows ]]--
+map('n', '<A-Up>', '<C-w>k', 'Window up')
+map('n', '<A-Down>', '<C-w>j', 'Window down')
+map('n', '<A-Left>', '<C-w>h', 'Window left')
+map('n', '<A-Right>', '<C-w>l', 'Window right')
