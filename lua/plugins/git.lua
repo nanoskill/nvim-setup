@@ -1,6 +1,6 @@
 return {
 	{ "lewis6991/gitsigns.nvim", opts = {} }, -- fot gutter and reset hunk
-	{ "sindrets/diffview.nvim", dependencies="nvim-lua/plenary.nvim" },
+	{ "esmuellert/codediff.nvim", cmd = "CodeDiff" },
 	{
     "f-person/git-blame.nvim",
     opts = {
